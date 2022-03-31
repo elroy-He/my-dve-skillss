@@ -5,9 +5,21 @@ module.exports = {
   show,
   new: newSkill,
   create,
-  delete: deleteSkill
+  delete: deleteSkill,
+  edit,
+  updateSkill
 }
 
+function updateSkill(req, res) {
+  Skill.update(req.params.id, req.body.done);
+  res.redirect('/skills');
+}
+
+function edit(req, res) {
+  res.render('skills/edit',{
+    skill: Skill.getOne(req.params.id)
+  })
+}
 
 function deleteSkill(req, res) {
   console.log(req.params.id);

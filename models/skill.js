@@ -8,8 +8,21 @@ module.exports = {
   getAll,
   getOne,
   create,
-  deleteOne
+  deleteOne,
+  update
 };
+
+function update(id, isOn) {
+  for (let i=0; i<skills.length; i++) {
+    if(skills[i].id === parseInt(id)) {
+      if (isOn === 'on') {
+        skills[i].isFluent = true;
+      } else {
+        skills[i].isFluent = false;
+      }
+    }
+  }
+}
 
 function getAll() {
   return skills;
