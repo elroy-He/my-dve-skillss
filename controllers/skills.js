@@ -7,16 +7,38 @@ module.exports = {
   create,
   delete: deleteSkill,
   edit,
-  updateSkill
+  editNew,
+  // updateSkill,
+  update
 }
 
-function updateSkill(req, res) {
-  Skill.update(req.params.id, req.body.done);
+function isNum(id) {
+  return !isNaN(id)
+}
+
+// function updateSkill(req, res) {
+//   Skill.update(req.params.id, req.body.done);
+//   res.redirect('/skills');
+// }
+
+function update(req, res) {
+  console.log(req.body);
+  if (req.body.skillEdit.length > 0) {
+    Skill.update(req.params.id, req.body.skillEdit);
+  } else {
+    Skill.update(req.params.id, req.body.done);
+  }
+
   res.redirect('/skills');
 }
 
 function edit(req, res) {
   res.render('skills/edit',{
+    skill: Skill.getOne(req.params.id)
+  })
+}
+function editNew(req, res) {
+  res.render('skills/editNew',{
     skill: Skill.getOne(req.params.id)
   })
 }

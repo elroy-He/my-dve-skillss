@@ -12,17 +12,30 @@ module.exports = {
   update
 };
 
-function update(id, isOn) {
-  for (let i=0; i<skills.length; i++) {
-    if(skills[i].id === parseInt(id)) {
-      if (isOn === 'on') {
-        skills[i].isFluent = true;
-      } else {
-        skills[i].isFluent = false;
+function isNum(id) {
+  return !isNaN(id)
+}
+
+function update(id, key) {
+  if (isNum(key) === true) {
+    for (let i=0; i<skills.length; i++) {
+      if(skills[i].id === parseInt(id)) {
+        if (key === 'on') {
+          skills[i].isFluent = true;
+        } else {
+          skills[i].isFluent = false;
+        }
+      }
+    }
+  } else if (isNum(key) === false) {
+    for (let i=0; i<skills.length; i++) {
+      if(skills[i].id === parseInt(id)) {
+        skills[i].skill = key;
       }
     }
   }
 }
+
 
 function getAll() {
   return skills;
